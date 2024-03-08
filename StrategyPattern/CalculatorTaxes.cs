@@ -4,17 +4,9 @@ namespace DesignPatterns.StrategyPattern;
 
 public class CalculatorTaxes
 {
-    public void ToCalculate(Budget budget, string taxe)
+    public void ToCalculate(Budget budget, ITax tax)
     {
-        if ("icms".Equals(taxe.ToLower()))
-        {
-            decimal icms = budget.Value * 0.10m;
-            Console.WriteLine($"ICMS is {icms.ToString("C", new CultureInfo("pt-BR"))}");
-            
-        }else if ("iss".Equals(taxe.ToLower()))
-        {
-            decimal iss = budget.Value * 0.06m;
-            Console.WriteLine($"ISS is {iss.ToString("C", new CultureInfo("pt-BR"))}");
-        }
+        var result = tax.ToCalculate(budget);
+        Console.WriteLine(string.Format("Tax {0} is: {1}", tax.GetType().Name, result.ToString("C", new CultureInfo("pt-BR"))));
     }
 }
