@@ -3,7 +3,9 @@
 using System.Globalization;
 using DesignPatterns.ChainOfResponsibilityPattern;
 using DesignPatterns.StrategyPattern;
+using DesignPatterns.TemplateMethodPattern;
 using Budget = DesignPatterns.StrategyPattern.Budget;
+using Product = DesignPatterns.ChainOfResponsibilityPattern.Product;
 
 #region strategy_pattern
 
@@ -42,5 +44,23 @@ budget2.AddProduct(new Product("Macbook PRO", 2700));
 var discount = calculatorDiscount.ToCalculate(budget2);
 
 Console.WriteLine($"Your discount is: {discount.ToString("C", new CultureInfo("pt-BR"))}");
+
+#endregion
+
+#region TemplateMethod_pattern
+/*
+ * Create a abstract class for implements logic stuctural calculate (template Method)
+ * and our concrete classes taxes implements calculate.
+ */
+
+var budget3 = new DesignPatterns.TemplateMethodPattern.Budget(200);
+
+var icpp = new Icpp();
+var taxIcpp = icpp.ToCalculate(budget3);
+Console.WriteLine($"Your tax Icpp is: {taxIcpp.ToString("C", new CultureInfo("pt-BR"))}");
+
+var ikcv = new Ikcv();
+var taxIkcv = ikcv.ToCalculate(budget3);
+Console.WriteLine($"Your tax Ikcv is: {taxIkcv.ToString("C", new CultureInfo("pt-BR"))}");
 
 #endregion
